@@ -1,18 +1,48 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import axios from "axios";
+import {useNavigate} from "react-router-dom";
+import { AuthContext } from "../../context/auth.context.jsx";
 
 function Login() {
 
+  const navigate = useNavigate()
+  const {authenticateUser} =useContext(AuthContext)
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("")
 
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
 
   const handleLogin = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
+      
+  
+    try {
 
-    // ... contactar al backend para validar credenciales de usuario aqui
-  };
+      const userCredentials = {
+        email,
+        password
+      }
+      
+    const response =  await service.post("/auth/login", userCredentials)
+    console.log(response)
+
+    localStorage.setItem("authToken", response.data.authToken)
+
+    await authenticateUser()
+    navigate("/private-page-example")
+
+
+
+    } catch (error) {
+      if(error.response.status === 400){
+
+        setErrorMessage(error.response.data.message) 
+      }else {
+       //pagina de error
+      }
+  }}
 
   return (
     <div>
@@ -41,6 +71,7 @@ function Login() {
         <br />
 
         <button type="submit">Acceder</button>
+        {errorMessage && <p>{errorMessage}</p>}
       </form>
       
     </div>
