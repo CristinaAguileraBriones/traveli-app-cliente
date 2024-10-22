@@ -25,7 +25,7 @@ function Navbar() {
       <Link className="nav-link" to="/contact">Contacto</Link>
       {!isLoggedIn && <Link className="nav-link" to="/signup">Registro</Link>}
       {!isLoggedIn && <Link className="nav-link" to="/login">Acceso</Link>}
-      {isLoggedIn && <Link className="nav-link" to="/private-page-example">Ejemplo Privado</Link>}
+      {isLoggedIn && <Link className="nav-link" to="/user-profile">Mi perfil</Link>}
       {isLoggedIn && <span className="nav-link logout-link" onClick={handleLogout}>Cerrar sesión</span>}
     </nav>
   );

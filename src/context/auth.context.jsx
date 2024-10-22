@@ -1,5 +1,6 @@
 
 import { createContext, useState, useEffect } from "react"
+import service from "../service/config"
 // componente contexto
 
 const AuthContext = createContext()
@@ -9,6 +10,7 @@ const AuthContext = createContext()
 function AuthWrapper(props){
 
   const [isLoggedIn, setIsLoggedId ] = useState(false)
+  const [user, setUser] = useState(null);
   const [loggedUserId, setLoggedUserId] = useState(null)
   const [isValidatingToken, setIsValidatingToken] = useState(true)
 
@@ -24,15 +26,17 @@ function AuthWrapper(props){
     
     try {
 
-      const authToken = localStorage.getItem("authToken")
+      // const authToken = localStorage.getItem("authToken")
 
       // const response = await axios.get("http://localhost:3000/api/auth/verify", {
       //   headers: {authorization: `Bearer ${authToken}`}
       // })
 
-     const response = service.get("/auth/verify")
+     const response = await service.get("/auth/verify")
+     console.log(response.data);
+     
 
-      console.log(response);
+    
       // en este punto el token es valido.
       setIsLoggedId(true);
       setLoggedUserId(response.data._id);
@@ -51,6 +55,8 @@ function AuthWrapper(props){
   const passedContext = {
     isLoggedIn,
     loggedUserId,
+    user,
+    setUser,
     authenticateUser
   }
 

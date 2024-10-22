@@ -28,13 +28,12 @@ export const HomePage = () => {
             </Link>
           </div>
           <div className="feature-item">
-            <h3>Servicio 2</h3>
-            <p>Descripción del servicio 2.</p>
+            <h3>Tus reservas</h3>
+            <Link to="/reservas">
+            <p>Regístrate en nuestra web y empieza a reservar tu hotel de ensueño</p>
+            </Link>
           </div>
-          <div className="feature-item">
-            <h3>Servicio 3</h3>
-            <p>Descripción del servicio 3.</p>
-          </div>
+          
         </div>
       </section>
 

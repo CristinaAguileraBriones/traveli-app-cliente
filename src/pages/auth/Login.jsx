@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import axios from "axios";
+import service from "../../service/config.js"
 import {useNavigate} from "react-router-dom";
 import { AuthContext } from "../../context/auth.context.jsx";
 
@@ -25,17 +25,19 @@ function Login() {
         password
       }
       
-    const response =  await service.post("/auth/login", userCredentials)
-    console.log(response)
+    const response =  await service.post("auth/login", userCredentials)
+    console.log("Respuesta de la ruta login", response)
 
     localStorage.setItem("authToken", response.data.authToken)
 
     await authenticateUser()
-    navigate("/private-page-example")
+    
+    navigate("/User-profile")
 
 
 
     } catch (error) {
+      
       if(error.response.status === 400){
 
         setErrorMessage(error.response.data.message) 
