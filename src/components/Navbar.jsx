@@ -1,33 +1,32 @@
 import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
+import './Navbar.css';  // Importamos el archivo CSS con los estilos
 
 function Navbar() {
-  const navigate = useNavigate()
-  const {isLoggedIn, authenticateUser} = useContext(AuthContext)
+  const navigate = useNavigate();
+  const { isLoggedIn, authenticateUser } = useContext(AuthContext);
 
-  const handleLogout =  async () =>{
-    
+  const handleLogout = async () => {
     try {
-      localStorage.removeItem("authToken") // removemos el token 
+      localStorage.removeItem("authToken"); // removemos el token
 
-      await authenticateUser() // validamos el token
+      await authenticateUser(); // validamos el token
 
-      navigate("/") 
-
+      navigate("/");
     } catch (error) {
       console.log(error);
-      
     }
-  }
- 
+  };
+
   return (
-    <nav>
-      <Link to="/">Home</Link>
-      {!isLoggedIn && <Link to="/signup">Registro</Link>}
-      {!isLoggedIn && <Link to="/login">Acceso</Link>}
-      {isLoggedIn && <Link to="/private-page-example">Ejemplo Privado</Link>}
-      {isLoggedIn && <Link onClick={handleLogout}>Cerrar sesión</Link>}
+    <nav className="navbar">
+      <Link className="nav-link" to="/">Home</Link>
+      <Link className="nav-link" to="/contact">Contacto</Link>
+      {!isLoggedIn && <Link className="nav-link" to="/signup">Registro</Link>}
+      {!isLoggedIn && <Link className="nav-link" to="/login">Acceso</Link>}
+      {isLoggedIn && <Link className="nav-link" to="/private-page-example">Ejemplo Privado</Link>}
+      {isLoggedIn && <span className="nav-link logout-link" onClick={handleLogout}>Cerrar sesión</span>}
     </nav>
   );
 }

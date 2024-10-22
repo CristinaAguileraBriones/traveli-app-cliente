@@ -1,0 +1,117 @@
+contact-page {
+  padding: 40px;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.contact-page h1 {
+  color: #333;
+  font-size: 2.5em;
+  margin-bottom: 20px;
+}
+
+.contact-page p {
+  color: #666;
+  font-size: 1.2em;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto 20px auto;
+}
+
+h2 {
+  font-size: 2em;
+  margin-top: 40px;
+  color: #333;
+}
+
+/* Estilos para las cartas de perfil */
+.profile-cards {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 40px;
+}
+
+.profile-card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 300px;
+  text-align: center;
+}
+
+.profile-photo {
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+  margin-bottom: 15px;
+}
+
+.profile-card h3 {
+  font-size: 1.5em;
+  color: #333;
+}
+
+.profile-card p {
+  font-size: 1.1em;
+  color: #777;
+  margin-bottom: 15px;
+}
+
+.linkedin-link {
+  color: #0077b5;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.linkedin-link:hover {
+  text-decoration: underline;
+}
+
+/* Estilos del formulario de atención al cliente */
+.customer-support-form {
+  margin-top: 40px;
+}
+
+.customer-support-form form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.customer-support-form label {
+  margin-bottom: 10px;
+  font-size: 1.2em;
+  color: #333;
+}
+
+.customer-support-form input,
+.customer-support-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 1em;
+}
+
+.customer-support-form textarea {
+  height: 150px;
+}
+
+.customer-support-form button {
+  padding: 10px 20px;
+  background-color: #0077b5;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.customer-support-form button:hover {
+  background-color: #005f87;
+}
