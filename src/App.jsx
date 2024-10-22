@@ -2,10 +2,10 @@ import "./App.css";
 import { Routes, Route } from "react-router";
 
 // pages
-import HomePage from "./pages/HomePage"
+import HomePage from "./pages/auth/HomePage"
 import Login from "./pages/auth/Login"
 import Signup from "./pages/auth/Signup"
-import PrivatePageExample from "./pages/PrivatePageExample";
+import PrivatePageExample from "./pages/private/PrivatePageExample";
 import Private from "./components/auth/Private";
 
 // components

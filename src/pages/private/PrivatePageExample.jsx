@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import service from '../service/config'
+import service from '../../service/config'
 
 function PrivatePageExample() {
 
