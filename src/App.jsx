@@ -9,6 +9,7 @@ import Signup from "./pages/auth/Signup"
 import PrivatePageExample from "./pages/private/PrivatePageExample";
 import Private from "./components/auth/Private";
 import UserProfile from "./pages/private/UserProfile";
+import NotFound from "./pages/error/NotFound";
 
 // components
 import Navbar from "./components/Navbar"
@@ -37,6 +38,7 @@ function App() {
 
         {/* error FE routes here... */}
         <Route path="/error" element={<Error/>}/>
+        <Route path="*" element={<NotFound />} />
 
       </Routes>
     </div>

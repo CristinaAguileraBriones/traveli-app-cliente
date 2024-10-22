@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function UserProfile() {
   const { authenticateUser } = useContext(AuthContext); 
+  const [imageFile, setImageFile] = useState(null)
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
     userId: '', 
@@ -22,6 +23,7 @@ function UserProfile() {
     const perfilUsuario = async () => {
       try {
         const response = await service.get("/user/profile");
+        console.log(response.data);
         const { user } = response.data; 
 
         setFormData({
@@ -46,6 +48,10 @@ function UserProfile() {
       ...formData,
       [name]: value
     });
+  };
+  //Maneja cambios en las imagenes
+  const handleImageChange = (e) => {
+    setImageFile(e.target.files[0]); // Guardamos el archivo seleccionado en el estado
   };
 
   // Función para manejar la actualización de perfil
@@ -125,12 +131,12 @@ function UserProfile() {
             <div className="mb-3">
               <label htmlFor="profile_image" className="form-label">Imagen de perfil:</label>
               <input
-                type="text"
+                type="file"
                 id="profile_image"
                 name="profile_image"
                 className="form-control"
                 value={formData.profile_image}
-                onChange={handleChange}
+                onChange={handleImageChange}
                 placeholder="URL de la imagen de perfil"
               />
             </div>

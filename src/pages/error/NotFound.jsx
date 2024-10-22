@@ -1,18 +1,16 @@
-// import React from "react";
-// //import imagenNotFound from "";
-// //import "./NotFound.css";
+import React from 'react';
+import './NotFound.css'; // Archivo CSS para los estilos
 
-// export const NotFound = () => {
-//   return (
-//     <div className="not-found-container">
-//       <img src="" alt="imagen" className="full-image" /> {/* Clase para la imagen */}
-//       <div className="not-found-div"> {/* Contenedor para el contenido superpuesto */}
-//         <h1>404</h1>
-//         <h2>Página No Encontrada</h2>
-//         <a href="/" className="button">
-//           <p>Lo sentimos, la página no existe volver a inicio.</p>
-//         </a>
-//       </div>
-//     </div>
-//   );
-// };
+function NotFound() {
+  return (
+    <div id="not-found" className="container d-flex align-items-center justify-content-center vh-100">
+      <div className="text-center">
+        <h1 className="display-1 fw-bold not-found-code">404</h1>
+        <p className="fs-3 text-muted">Sorry, the page you are looking for was not found.</p>
+        <a href="/" className="btn btn-custom mt-4">Go Back to Home</a>
+      </div>
+    </div>
+  );
+}
+
+export default NotFound;
