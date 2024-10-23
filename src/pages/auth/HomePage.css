@@ -17,14 +17,35 @@ section {
 
 /* Hero section */
 .hero-section {
-  background-color: #a0d9d9; 
-  color: #333; 
+  background-image: url(https://destinopachaonly.theibizahotels.com/data/Pics/OriginalPhoto/12724/1272459/1272459412/destino-pacha-ibiza-resort-playa-de-talamanca-pic-58.JPEG);
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  color: #fff;
   padding: 60px 20px;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3); /* Cambia el valor de 0.3 para ajustar la opacidad */
+  z-index: 0;
 }
 
-.hero-content {
+.hero-content, .hero-content p {
+  position: relative;
+  z-index: 1;
   max-width: 600px;
   margin: 0 auto;
+  color: #fff;
 }
 
 .hero-image img {

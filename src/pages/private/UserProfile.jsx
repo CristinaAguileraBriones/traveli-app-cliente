@@ -81,6 +81,9 @@ function UserProfile() {
   const goToReservation = () => {
     navigate("/reservas"); 
   };
+  
+
+  
 
   return (
     <div className="container-fluid vh-100 d-flex justify-content-center align-items-center bg-light">
@@ -98,13 +101,12 @@ function UserProfile() {
     <ul>
       {formData.favoritos.map(fav => (
         <li key={fav._id}>
-          <strong>{fav}</strong> 
+          <strong>{fav}</strong>
         </li>
       ))}
     </ul>
     // HACIENDO CUALQUIER CAMBIO
   )}
-
 
             <button className="btn btn-primary mt-3" onClick={() => setIsEditing(true)}>
               Editar Perfil

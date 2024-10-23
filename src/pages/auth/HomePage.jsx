@@ -1,4 +1,3 @@
-
 import { Link } from 'react-router-dom';
 import './HomePage.css';  // Asegúrate de tener tu archivo CSS
 //import imagenHome from "../images/home.jpg"
@@ -11,9 +10,10 @@ export const HomePage = () => {
         <div className="hero-content">
           <h1>Bienvenido a Traveli, tu página de reservas de hotel</h1>
           <p>¿Qué lugar del mundo vamos a explorar hoy?</p>
+          
         </div>
         <div className="hero-image">
-          <img src="path-to-your-image.jpg" alt="Imagen portada" />
+         
         </div>
       </section>
 

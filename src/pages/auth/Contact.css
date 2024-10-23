@@ -1,30 +1,24 @@
-contact-page {
-  padding: 40px;
-  text-align: center;
+body {
   font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #f4f1eb; /* Color crema claro */
 }
 
-.contact-page h1 {
-  color: #333;
-  font-size: 2.5em;
-  margin-bottom: 20px;
+.contact-page h1, .contact-page h2 {
+  color: #4a4a4a; /* Gris oscuro suave */
 }
 
 .contact-page p {
-  color: #666;
+  color: #7d7d7d; /* Gris medio para el texto */
   font-size: 1.2em;
   line-height: 1.6;
   max-width: 800px;
   margin: 0 auto 20px auto;
 }
 
-h2 {
-  font-size: 2em;
-  margin-top: 40px;
-  color: #333;
-}
-
-/* Estilos para las cartas de perfil */
+/* Sección de perfiles */
 .profile-cards {
   display: flex;
   justify-content: center;
@@ -33,7 +27,7 @@ h2 {
 }
 
 .profile-card {
-  background-color: #fff;
+  background-color: #fffdf5; /* Color blanco roto/crudo */
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
@@ -50,17 +44,17 @@ h2 {
 
 .profile-card h3 {
   font-size: 1.5em;
-  color: #333;
+  color: #4a4a4a; /* Gris oscuro */
 }
 
 .profile-card p {
   font-size: 1.1em;
-  color: #777;
+  color: #7d7d7d; /* Gris medio */
   margin-bottom: 15px;
 }
 
 .linkedin-link {
-  color: #0077b5;
+  color: #b28b47; /* Color dorado suave */
   text-decoration: none;
   font-weight: bold;
 }
@@ -85,7 +79,7 @@ h2 {
 .customer-support-form label {
   margin-bottom: 10px;
   font-size: 1.2em;
-  color: #333;
+  color: #4a4a4a; /* Gris oscuro suave */
 }
 
 .customer-support-form input,
@@ -96,6 +90,7 @@ h2 {
   border-radius: 5px;
   border: 1px solid #ccc;
   font-size: 1em;
+  background-color: #f8f4e3; /* Fondo crudo claro */
 }
 
 .customer-support-form textarea {
@@ -104,7 +99,7 @@ h2 {
 
 .customer-support-form button {
   padding: 10px 20px;
-  background-color: #0077b5;
+  background-color: #b28b47; /* Color dorado suave */
   color: white;
   border: none;
   border-radius: 5px;
@@ -113,5 +108,5 @@ h2 {
 }
 
 .customer-support-form button:hover {
-  background-color: #005f87;
+  background-color: #9c7b3d; /* Color dorado un poco más oscuro */
 }
