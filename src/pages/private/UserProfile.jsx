@@ -18,14 +18,13 @@ function UserProfile() {
   
   const navigate = useNavigate(); 
 
-  console.log(formData)
   useEffect(() => {
+    console.log("pidiendo datos desde Useffect")
     const perfilUsuario = async () => {
       try {
         const response = await service.get("/user/profile");
-        console.log(response.data);
         const { user } = response.data; 
-
+        console.log(response.data)
         setFormData({
           userId: user._id, 
           name: user.name,
@@ -52,6 +51,22 @@ function UserProfile() {
   
   const handleImageChange = (e) => {
     setImageFile(e.target.files[0]); 
+  };
+
+  const handleDeleteFavorito = async (hotelId) => {
+    try {
+      // Llama a la ruta de DELETE en el backend
+      console.log(hotelId)
+      await service.delete(`/user/profile/favoritos/${hotelId}`);
+      // Elimina el favorito del estado local
+      setFormData({
+        ...formData,
+        favoritos: formData.favoritos.filter(fav => fav !== hotelId)
+      });
+      console.log('Favorito eliminado');
+    } catch (error) {
+      console.log('Error al eliminar el favorito:', error);
+    }
   };
 
  
@@ -99,9 +114,16 @@ function UserProfile() {
 
             {formData.favoritos.length > 0 && (
     <ul>
-      {formData.favoritos.map(fav => (
-        <li key={fav._id}>
+      {formData.favoritos.map((fav, index )=> (
+        <li key={index}>
           <strong>{fav}</strong>
+          {/* Botón para eliminar favorito */}
+          <button
+                      className="btn btn-danger ms-3"
+                      onClick={() => handleDeleteFavorito(fav)}
+                    >
+                      Eliminar
+                    </button>
         </li>
       ))}
     </ul>
