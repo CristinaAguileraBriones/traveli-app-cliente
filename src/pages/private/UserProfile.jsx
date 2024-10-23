@@ -16,9 +16,9 @@ function UserProfile() {
     favoritos: []
   });
   
-  const navigate = useNavigate(); // Hook de React Router para redirigir al usuario
+  const navigate = useNavigate(); 
 
-  // Efecto para cargar la información del perfil del usuario
+  console.log(formData)
   useEffect(() => {
     const perfilUsuario = async () => {
       try {
@@ -41,7 +41,7 @@ function UserProfile() {
     perfilUsuario();
   }, []);
 
-  // Manejar cambios en los inputs del formulario
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -49,12 +49,12 @@ function UserProfile() {
       [name]: value
     });
   };
-  //Maneja cambios en las imagenes
+  
   const handleImageChange = (e) => {
-    setImageFile(e.target.files[0]); // Guardamos el archivo seleccionado en el estado
+    setImageFile(e.target.files[0]); 
   };
 
-  // Función para manejar la actualización de perfil
+ 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -72,9 +72,14 @@ function UserProfile() {
     }
   };
 
-  // Función para redirigir a la página de hoteles
+
   const goToHotels = () => {
     navigate("/hotels");
+  };
+
+
+  const goToReservation = () => {
+    navigate("/reservas"); 
   };
 
   return (
@@ -88,6 +93,18 @@ function UserProfile() {
             <p><strong>Email:</strong> {formData.email}</p>
             <p><strong>Imagen de perfil:</strong> {formData.profile_image || "No especificada"}</p>
             <p><strong>Hoteles favoritos:</strong> {formData.favoritos.length} alojamientos</p>
+
+            {formData.favoritos.length > 0 && (
+    <ul>
+      {formData.favoritos.map(fav => (
+        <li key={fav._id}>
+          <strong>{fav}</strong> 
+        </li>
+      ))}
+    </ul>
+  )}
+
+
             <button className="btn btn-primary mt-3" onClick={() => setIsEditing(true)}>
               Editar Perfil
             </button>
@@ -97,6 +114,13 @@ function UserProfile() {
               onClick={goToHotels}
             >
               Ir a hoteles
+            </button>
+            {/* Nuevo botón para acceder a la página de reservas */}
+            <button 
+              className="btn btn-success mt-3 ms-3"
+              onClick={goToReservation}
+            >
+              Realiza tu reserva
             </button>
           </div>
         ) : (
