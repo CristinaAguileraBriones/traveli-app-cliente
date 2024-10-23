@@ -64,6 +64,7 @@ function UserProfile() {
         favoritos: formData.favoritos.filter(fav => fav !== hotelId)
       });
       console.log('Favorito eliminado');
+
     } catch (error) {
       console.log('Error al eliminar el favorito:', error);
     }
@@ -79,6 +80,7 @@ function UserProfile() {
         favoritos: formData.favoritos
       });
 
+      
       console.log('Perfil actualizado');
       setIsEditing(false);
       navigate("/user-profile");
