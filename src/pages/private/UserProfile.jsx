@@ -23,8 +23,8 @@ function UserProfile() {
     const perfilUsuario = async () => {
       try {
         const response = await service.get("/user/profile");
-        const { user } = response.data; 
-        console.log(response.data)
+        const user = response.data
+        
         setFormData({
           userId: user._id, 
           name: user.name,
@@ -44,9 +44,9 @@ function UserProfile() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
-      ...formData,
-      [name]: value
-    });
+      ...formData, //recordamos el operador spread que copia todas las propiedades del objeto
+      [name]: value //cambia al valor actualizado, esto actualiza el nombre en el front y en la base de datos COMPROBADO
+    }); 
   };
   
   const handleImageChange = (e) => {
@@ -61,7 +61,7 @@ function UserProfile() {
       // Elimina el favorito del estado local
       setFormData({
         ...formData,
-        favoritos: formData.favoritos.filter(fav => fav !== hotelId)
+        favoritos: formData.favoritos.filter(fav => fav !== hotelId) // EL FILTER NO CREABA OTRO ARRAY? INCONSISTENCIA DE DATOS?
       });
       console.log('Favorito eliminado');
 
@@ -71,15 +71,14 @@ function UserProfile() {
   };
 
  
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => { //AQUI SOSPECHO QUE PUEDE ESTAR EL FALLO
     e.preventDefault();
     try {
       await service.put(`/user/${formData.userId}`, {
         name: formData.name,
         profile_image: formData.profile_image,
-        favoritos: formData.favoritos
+        favoritos: formData.favoritos //ESTO ES UN ARRAY
       });
-
       
       console.log('Perfil actualizado');
       setIsEditing(false);
@@ -129,7 +128,7 @@ function UserProfile() {
         </li>
       ))}
     </ul>
-    // HACIENDO CUALQUIER CAMBIO
+ 
   )}
 
             <button className="btn btn-primary mt-3" onClick={() => setIsEditing(true)}>
