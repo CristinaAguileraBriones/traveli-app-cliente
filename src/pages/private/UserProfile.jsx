@@ -5,7 +5,7 @@ import service from "../../service/config";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function UserProfile() {
-  const { authenticateUser } = useContext(AuthContext);
+  //const { authenticateUser } = useContext(AuthContext);
 
   const [imageUrl, setImageUrl] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
@@ -23,7 +23,7 @@ function UserProfile() {
 
   //FUNCION CLOUDINARY:
   const handleFileUpload = async (event) => {
-    // console.log("The file to be uploaded is: ", e.target.files[0]);
+    console.log("The file to be uploaded is: ", e.target.files[0]);
 
     if (!event.target.files[0]) {
       // to prevent accidentally clicking the choose file button and not selecting a file
@@ -38,7 +38,7 @@ function UserProfile() {
     //     this name needs to match the name used in the middleware in the backend => uploader.single("image")
 
     try {
-      const response = await axios.post(
+      const response = await service.post(
         "http://localhost:3000/api/upload",
         uploadData
       );
@@ -110,7 +110,7 @@ function UserProfile() {
     try {
       await service.put(`/user/${formData.userId}`, {
         name: formData.name,
-        profile_image: formData.profile_image,
+        profile_image: formData.profile_image || imageUrl,
         favoritos: formData.favoritos, //ESTO ES UN ARRAY
       });
 
@@ -254,7 +254,7 @@ function UserProfile() {
             ) : null}
 
 
-            
+
             <div className="mb-3">
               <label htmlFor="favoritos" className="form-label">
                 Hoteles favoritos:
