@@ -39,7 +39,10 @@ function Hotel() {
   useEffect(() => {
     service.get('/alojamiento')  
       .then(response => {
-        setHotel(response.data);  
+        setHotel(response.data); 
+        
+        console.log(response.data);
+        
        
         const initialIndexes = response.data.reduce((acc, hotel) => {
           acc[hotel._id] = 0;

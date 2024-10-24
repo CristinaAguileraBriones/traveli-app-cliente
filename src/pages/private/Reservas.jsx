@@ -1,18 +1,26 @@
-import React, { useState } from 'react';
-import './Reserva.css'; 
+import React, { useState, useContext } from "react";
+import "./Reserva.css";
+import { useParams, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/auth.context"; 
+import service from "../../service/config"; 
 
 function Reserva() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    checkIn: '',
-    checkOut: '',
-    guests: 1,
-    specialRequests: '',
-  });
-  const [submitted, setSubmitted] = useState(false); // Estado para controlar si el formulario ha sido enviado
+  const { hotelName } = useParams(); 
+  const { isLoggedIn, token } = useContext(AuthContext); 
+  const navigate = useNavigate(); 
 
-  // Maneja los cambios en los campos del formulario
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    checkIn: "",
+    checkOut: "",
+    guests: 1,
+    specialRequests: "",
+    alojamiento: "",
+  });
+
+  const [submitted, setSubmitted] = useState(false);
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -21,32 +29,50 @@ function Reserva() {
     });
   };
 
-  // Validar y enviar el formulario
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validación simple: comprobar que todos los campos estén llenos
-    if (!formData.name || !formData.email || !formData.checkIn || !formData.checkOut || !formData.guests) {
-      alert('Por favor, complete todos los campos obligatorios.');
+    
+    if (!formData.name || !formData.email || !formData.checkIn || !formData.checkOut || !formData.guests || !formData.alojamiento) {
       return;
     }
 
-    // Aquí puedes hacer una solicitud POST al servidor para enviar los datos de la reserva
-    // Ejemplo: service.post('/reservas', formData)
-    console.log('Datos de la reserva enviados:', formData);
+    
+    try {
+      const response = await service.post(
+        '/reserva/addReserva',
+        {
+          guestName: formData.name,
+          email: formData.email,
+          alojamiento: hotelName, 
+          checkInDate: formData.checkIn,
+          checkOutDate: formData.checkOut,
+          numberOfGuests: formData.guests,
+          specialRequests: formData.specialRequests,
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` }, 
+        }
+      );
 
-    // Marcar como enviado
-    setSubmitted(true);
+      console.log("Reserva realizada con éxito:", response.data);
+      setSubmitted(true); 
+      navigate("/"); 
+    } catch (error) {
+      console.error("Error al realizar la reserva:", error);
+    }
   };
 
   return (
     <div className="reserva-page">
-      <h1>Reserva tu Estancia</h1>
+      <h1>Reserva tu Estancia en el alojamiento: {hotelName}</h1>
       {submitted ? (
         <div className="confirmation-message">
           <h2>¡Reserva confirmada!</h2>
           <p>Gracias, {formData.name}, por tu reserva.</p>
           <p>Te hemos enviado un correo de confirmación a: {formData.email}</p>
+          <p>Tipo de alojamiento: {formData.alojamiento}</p>
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="reserva-form">
@@ -124,7 +150,25 @@ function Reserva() {
             />
           </div>
 
-          <button type="submit" className="submit-btn">Enviar reserva</button>
+          <div className="form-group">
+            <label htmlFor="alojamiento">Tipo de alojamiento</label>
+            <select
+              id="alojamiento"
+              name="alojamiento"
+              value={formData.alojamiento}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Selecciona el tipo de alojamiento</option>
+              <option value="habitacion-estandar">Habitación estándar</option>
+              <option value="suite">Suite</option>
+              <option value="villa">Villa</option>
+            </select>
+          </div>
+
+          <button type="submit" className="submit-btn">
+            Enviar reserva
+          </button>
         </form>
       )}
     </div>

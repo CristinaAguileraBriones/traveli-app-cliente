@@ -32,7 +32,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/hotels" element={<Hotel/>}/>
-        <Route path="/reservas" element={ <Private > <Reservas/> </Private> }/>
+        <Route path="/reservas/:hotelName" element={ <Private > <Reservas/> </Private> }/>
         <Route path="//user-profile" element={<Private > <UserProfile/> </Private>}/>
         <Route path="/private-page-example" element={<Private ><PrivatePageExample/> </Private>} />
 
