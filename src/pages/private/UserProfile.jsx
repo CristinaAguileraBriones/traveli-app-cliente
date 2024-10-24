@@ -212,7 +212,6 @@ function UserProfile() {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                disabled
               />
             </div>
             <div>
