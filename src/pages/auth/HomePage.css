@@ -158,3 +158,13 @@ section {
 .footer-section p {
   margin: 5px 0;
 }
+
+a {
+  text-decoration: none; 
+  color: inherit; 
+}
+
+
+.features-section a {
+  text-decoration: none; 
+}
