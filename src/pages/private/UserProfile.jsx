@@ -32,9 +32,7 @@ function UserProfile() {
     uploadData.append("image", event.target.files[0]);
 
     try {
-      const response = await service.post("/upload", uploadData, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const response = await service.post("/upload", uploadData,);
 
       const newImageUrl = response.data.imageUrl;
       setImageUrl(newImageUrl);
@@ -150,7 +148,7 @@ function UserProfile() {
                     key={index}
                     className="list-group-item d-flex justify-content-between align-items-center"
                   >
-                    {fav}
+                    {fav.name}
                     <button
                       className="btn btn-danger btn-sm"
                       onClick={() => handleDeleteFavorito(fav)}
