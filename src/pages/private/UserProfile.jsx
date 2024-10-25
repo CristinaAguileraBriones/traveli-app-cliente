@@ -6,6 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./UserProfile.css";
 
 function UserProfile() {
+  const [reservas, setReservas] = useState([]);
   const { isLoggedIn, token } = useContext(AuthContext);
   const [imageUrl, setImageUrl] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
@@ -19,6 +20,7 @@ function UserProfile() {
   });
 
   const navigate = useNavigate();
+
 
   // Función de Cloudinary para manejar la subida de archivos
   const handleFileUpload = async (event) => {
@@ -47,26 +49,42 @@ function UserProfile() {
     }
   };
 
-  useEffect(() => {
-    const perfilUsuario = async () => {
-      try {
-        const response = await service.get("/user/profile");
-        const user = response.data;
+  // hacer llamada a reserva GET:
+  const getReserva = async () =>{
+    const response = await service.get("/reserva")
+    console.log(response);
+    
+    setReservas(response.data);
 
-        setFormData({
-          userId: user._id,
-          name: user.name,
-          email: user.email,
-          profile_image: user.profile_image || "",
-          favoritos: user.favoritos || [],
-        });
-      } catch (error) {
-        console.log("Error al obtener los datos del usuario", error);
-      }
-    };
+  }
+
+  const perfilUsuario = async () => {
+    try {
+      const response = await service.get("/user/profile/favoritos");
+      const user = response.data;
+
+      setFormData({
+        userId: user._id,
+        name: user.name,
+        email: user.email,
+        profile_image: user.profile_image || "",
+        favoritos: user.favoritos || [],
+      });
+    } catch (error) {
+      console.log("Error al obtener los datos del usuario", error);
+    }
+  };
+
+
+  useEffect(() => {
+
+    getReserva();
+    
 
     perfilUsuario();
   }, []);
+
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -77,16 +95,32 @@ function UserProfile() {
   };
 
   const handleDeleteFavorito = async (hotelId) => {
+    console.log("esto deberia ser hotelid" , hotelId);
+    
     try {
       await service.delete(`/user/profile/favoritos/${hotelId}`);
       setFormData({
         ...formData,
         favoritos: formData.favoritos.filter((fav) => fav !== hotelId),
       });
+      perfilUsuario()
     } catch (error) {
       console.log("Error al eliminar el favorito:", error);
     }
   };
+
+
+
+
+  const handleDeleteReserva = async (e) =>{
+    await service.delete(`/reserva/${e.target.name}`)
+    getReserva();
+
+    console.log(e.target.name);
+  }
+
+
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -145,18 +179,19 @@ function UserProfile() {
 
             {formData.favoritos.length > 0 && (
               <ul className="list-group mb-3">
+                {console.log("data", formData)}
+                
                 {formData.favoritos.map((fav, index) => (
                   <li
-                    key={index}
-                    className="list-group-item d-flex justify-content-between align-items-center"
+                    key={index}className="list-group-item d-flex justify-content-between align-items-center"
                   >
-                    {fav}
                     <button
                       className="btn btn-danger btn-sm"
-                      onClick={() => handleDeleteFavorito(fav)}
-                    >
+                      onClick={() => handleDeleteFavorito(fav._id)}
+                      >
                       Eliminar
                     </button>
+                      {fav._id}
                   </li>
                 ))}
               </ul>
@@ -176,6 +211,19 @@ function UserProfile() {
                 Realizar Reserva
               </button>
             </div>
+            {reservas.map( (reserva)=>{
+              return (
+                <div key={reservas._id}>
+                  <h3>
+                    {reserva.alojamiento.address}
+                  
+                  </h3>
+                  <button onClick={handleDeleteReserva} name={reserva._id}>Eliminar</button>
+                </div>
+              );
+              
+
+            } )}
           </div>
         ) : (
           <form onSubmit={handleSubmit}>
