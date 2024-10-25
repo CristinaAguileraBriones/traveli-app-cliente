@@ -1,10 +1,4 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  background-color: #fdfdfd; 
-}
+
 
 h1, h2, h3 {
   color: #333; 
@@ -29,6 +23,7 @@ section {
   justify-content: center;
   text-align: center;
 }
+
 .hero-section::before {
   content: '';
   position: absolute;
@@ -39,6 +34,43 @@ section {
   background-color: rgba(0, 0, 0, 0.3); /* Cambia el valor de 0.3 para ajustar la opacidad */
   z-index: 0;
 }
+
+
+
+.hero-section h1 {
+  color: white;
+  font-size: 50px; /* Tamaño del texto */
+  font-weight: 700; /* Texto más grueso */
+  text-shadow: 2px 4px 6px rgba(0, 0, 0, 0.3); /* Sombra del texto */
+  letter-spacing: 2px; /* Espaciado entre letras */
+  text-transform: uppercase; /* Convertir texto a mayúsculas */
+  margin: 0; /* Eliminar márgenes */
+  padding: 20px 0; /* Espaciado superior e inferior */
+  line-height: 1.2; /* Ajustar la altura de línea */
+  font-family: 'Roboto', sans-serif; /* Tipografía moderna */
+  text-align: center; /* Centrar el texto horizontalmente */
+  justify-content: center; /* Centrar el contenido en el eje horizontal */
+  animation: fadeInUp 1s ease-out; /* Animación de entrada suave */
+  display: inline
+}
+
+/* Animación para una entrada suave desde abajo */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+.hero-content p{
+  font-size: 30px;
+}
+
 
 .hero-content, .hero-content p {
   position: relative;
@@ -168,3 +200,4 @@ a {
 .features-section a {
   text-decoration: none; 
 }
+

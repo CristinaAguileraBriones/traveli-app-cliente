@@ -8,7 +8,7 @@ export const HomePage = () => {
       {/* Hero Section: Imagen de portada y encabezado */}
       <section className="hero-section">
         <div className="hero-content">
-          <h1>Bienvenido a Traveli, tu página de reservas de hotel</h1>
+          <h1>Bienvenido a Traveli, reserva tu hotel</h1>
           <p>¿Qué lugar del mundo vamos a explorar hoy?</p>
           
         </div>

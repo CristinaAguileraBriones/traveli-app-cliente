@@ -3,9 +3,10 @@ import { AuthContext } from "../../context/auth.context";
 import { useNavigate } from "react-router-dom";
 import service from "../../service/config";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./UserProfile.css";
 
 function UserProfile() {
-  const { isLoggedIn, token } = useContext(AuthContext); 
+  const { isLoggedIn, token } = useContext(AuthContext);
   const [imageUrl, setImageUrl] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
@@ -19,40 +20,32 @@ function UserProfile() {
 
   const navigate = useNavigate();
 
-  //FUNCION CLOUDINARY:
+  // Función de Cloudinary para manejar la subida de archivos
   const handleFileUpload = async (event) => {
-  if (!event.target.files[0]) {
-    console.log("No se ha seleccionado ningún archivo.");
-    return;
-  }
+    if (!event.target.files[0]) {
+      console.log("No se ha seleccionado ningún archivo.");
+      return;
+    }
 
-  setIsUploading(true);
+    setIsUploading(true);
+    const uploadData = new FormData();
+    uploadData.append("image", event.target.files[0]);
 
-  const uploadData = new FormData();
-  uploadData.append("image", event.target.files[0]);
+    try {
+      const response = await service.post("/upload", uploadData, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
-  try {
-    
-    const response = await service.post("/upload", uploadData, {
-      headers: { Authorization: `Bearer ${token}` }, 
-    });
-
-    const newImageUrl = response.data.imageUrl;
-    setImageUrl(newImageUrl);
-    setIsUploading(false);
-    console.log("Imagen subida con éxito:", newImageUrl);
-    // pausar el proceso para pasar a guardar cambios
-
-    // actualizar la imagen que se muestra en el paso de la actualización
-  } catch (error) {
-    console.error("Error al subir la imagen:", error);
-    setIsUploading(false);
-    navigate("/error");
-  }
-};
-
-
-
+      const newImageUrl = response.data.imageUrl;
+      setImageUrl(newImageUrl);
+      setIsUploading(false);
+      console.log("Imagen subida con éxito:", newImageUrl);
+    } catch (error) {
+      console.error("Error al subir la imagen:", error);
+      setIsUploading(false);
+      navigate("/error");
+    }
+  };
 
   useEffect(() => {
     const perfilUsuario = async () => {
@@ -79,31 +72,26 @@ function UserProfile() {
     const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: value, 
+      [name]: value,
     });
   };
 
   const handleDeleteFavorito = async (hotelId) => {
     try {
       await service.delete(`/user/profile/favoritos/${hotelId}`);
-      
       setFormData({
         ...formData,
-        favoritos: formData.favoritos.filter((fav) => fav !== hotelId), 
+        favoritos: formData.favoritos.filter((fav) => fav !== hotelId),
       });
     } catch (error) {
       console.log("Error al eliminar el favorito:", error);
     }
   };
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("llamando a handl");
     try {
-      
-       
-      const response = await service.put(`/user/${formData.userId}`, {
+      await service.put(`/user/${formData.userId}`, {
         name: formData.name,
         email: formData.email,
         profile_image: imageUrl || formData.profile_image,
@@ -112,13 +100,10 @@ function UserProfile() {
 
       setIsEditing(false);
       window.location.reload();
-      //navigate("/user-profile");
     } catch (error) {
       console.log("Error al actualizar el perfil:", error);
     }
   };
-
-  
 
   const goToHotels = () => {
     navigate("/hotels");
@@ -130,36 +115,44 @@ function UserProfile() {
 
   return (
     <div className="container-fluid vh-100 d-flex justify-content-center align-items-center bg-light">
-      <div className="col-lg-8 col-md-10 bg-white p-4 shadow rounded">
-        <h1 className="mb-4">Perfil de Usuario</h1>
+      <div className="col-lg-6 col-md-8 bg-white p-5 shadow rounded">
+        <h1 className="mb-4 text-center">Perfil de Usuario</h1>
+        <div className="mb-3">
+          {formData.profile_image ? (
+            <img
+              src={formData.profile_image}
+              alt="Imagen de perfil"
+              className="img-thumbnail"
+            />
+          ) : (
+            <span>No especificada</span>
+          )}
+        </div>
 
         {!isEditing ? (
-          <div>
-            <p>
+          <div className="div-contenido">
+            <p className="lead">
               <strong>Nombre:</strong> {formData.name}
             </p>
-            <p>
+            <p className="lead">
               <strong>Email:</strong> {formData.email}
             </p>
-            <div>
-              <strong>Imagen de perfil:</strong>{" "}
-              {formData.profile_image ? (
-                <img src={formData.profile_image} alt="Imagen de perfil" width={200} />
-              ) : (
-                "No especificada"
-              )}
-            </div>
-            <p>
-              <strong>Hoteles favoritos:</strong> {formData.favoritos.length} alojamientos
+
+            <p className="lead">
+              <strong>Hoteles favoritos:</strong> {formData.favoritos.length}{" "}
+              alojamientos
             </p>
 
             {formData.favoritos.length > 0 && (
-              <ul>
+              <ul className="list-group mb-3">
                 {formData.favoritos.map((fav, index) => (
-                  <li key={index}>
-                    <strong>{fav}</strong>
+                  <li
+                    key={index}
+                    className="list-group-item d-flex justify-content-between align-items-center"
+                  >
+                    {fav}
                     <button
-                      className="btn btn-danger ms-3"
+                      className="btn btn-danger btn-sm"
                       onClick={() => handleDeleteFavorito(fav)}
                     >
                       Eliminar
@@ -169,29 +162,27 @@ function UserProfile() {
               </ul>
             )}
 
-            <button
-              className="btn btn-primary mt-3"
-              onClick={() => setIsEditing(true)}
-            >
-              Editar Perfil
-            </button>
-            <button
-              className="btn btn-secondary mt-3 ms-3"
-              onClick={goToHotels}
-            >
-              Ir a hoteles
-            </button>
-            <button
-              className="btn btn-success mt-3 ms-3"
-              onClick={goToReservation}
-            >
-              Realiza tu reserva
-            </button>
+            <div className="d-flex justify-content-between">
+              <button
+                className="btn btn-primary"
+                onClick={() => setIsEditing(true)}
+              >
+                Editar Perfil
+              </button>
+              <button className="btn btn-secondary" onClick={goToHotels}>
+                Ir a Hoteles
+              </button>
+              <button className="btn btn-success" onClick={goToReservation}>
+                Realizar Reserva
+              </button>
+            </div>
           </div>
         ) : (
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
-              <label htmlFor="name" className="form-label">Nombre:</label>
+              <label htmlFor="name" className="form-label">
+                Nombre:
+              </label>
               <input
                 type="text"
                 id="name"
@@ -203,7 +194,9 @@ function UserProfile() {
               />
             </div>
             <div className="mb-3">
-              <label htmlFor="email" className="form-label">Correo electrónico:</label>
+              <label htmlFor="email" className="form-label">
+                Correo electrónico:
+              </label>
               <input
                 type="email"
                 id="email"
@@ -214,44 +207,43 @@ function UserProfile() {
                 required
               />
             </div>
-            <div>
-              <label>Imagen: </label>
+            <div className="mb-3">
+              <label>Imagen:</label>
               <input
                 type="file"
+                className="form-control"
                 name="image"
                 onChange={handleFileUpload}
                 disabled={isUploading}
               />
+              {isUploading ? (
+                <div className="text-muted mt-2">Subiendo imagen...</div>
+              ) : null}
             </div>
-            {isUploading ? <h3>... uploading image</h3> : null}
-            {formData.profile_image ? (
-              <div>
-                <img src={formData.profile_image} alt="Imagen de perfil" width={200} />
+
+            {formData.profile_image && (
+              <div className="mb-3">
+                <img
+                  src={formData.profile_image}
+                  alt="Imagen de perfil"
+                  className="img-thumbnail"
+                  width={200}
+                />
               </div>
-            ) : null}
+            )}
 
-            <div className="mb-3">
-              <label htmlFor="favoritos" className="form-label">Hoteles favoritos:</label>
-              <input
-                type="text"
-                id="favoritos"
-                name="favoritos"
-                className="form-control"
-                value={formData.favoritos}
-                onChange={handleChange}
-                disabled
-              />
+            <div className="d-flex justify-content-between">
+              <button type="submit" className="btn btn-success">
+                Guardar cambios
+              </button>
+              <button
+                type="button"
+                className="btn btn-secondary"
+                onClick={() => setIsEditing(false)}
+              >
+                Cancelar
+              </button>
             </div>
-
-            <button type="submit" className="btn btn-success">Guardar cambios</button>
-
-            <button
-              type="button"
-              className="btn btn-secondary ms-2"
-              onClick={() => setIsEditing(false)}
-            >
-              Cancelar
-            </button>
           </form>
         )}
       </div>
