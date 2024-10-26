@@ -6,8 +6,6 @@ export function MisReservas() {
  
   const [reservas, setReservas] = useState([]);
 
- 
-
   const getReserva = async () => {
     const response = await service.get("/reserva");
     console.log(response);
@@ -30,7 +28,7 @@ export function MisReservas() {
   };
 
   const handleEditReserva = async (e) =>{
-    await service.put(`/${e.target.name}/edit`)
+    await service.put(`reserva/${e.target.name}/edit`)
     getReserva()
   }
   return (

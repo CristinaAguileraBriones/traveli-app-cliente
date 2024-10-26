@@ -1,8 +1,9 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "./Reserva.css";
 import { useParams, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context"; 
-import service from "../../service/config"; 
+import service from "../../service/config";
+
 
 function Reserva() {
   const { hotelId } = useParams(); 
@@ -16,7 +17,7 @@ function Reserva() {
     checkOut: "",
     guests: 1,
     specialRequests: "",
-    alojamiento: "",  
+    alojamiento: hotelId || "",  
   });
 
   const [submitted, setSubmitted] = useState(false);
@@ -29,27 +30,42 @@ function Reserva() {
     });
   };
 
+  useEffect(() => {
+    console.log("ID del hotel (hotelId):", hotelId);
+    setFormData((prevData) => ({
+      ...prevData,
+      alojamiento: hotelId,
+    }));
+  }, [hotelId]);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const checkInDate = new Date(formData.checkIn);
+    const checkOutDate = new Date(formData.checkOut)
     
-    if (!formData.name || !formData.email || !formData.checkIn || !formData.checkOut || !formData.guests || !formData.alojamiento) {
+    if (!formData.guestName || !formData.email || !formData.checkIn || !formData.checkOut || !formData.guests || !formData.alojamiento) {
       return;
     }
-
+    console.log("Datos de reserva que se enviarán:", {
+      guestName: formData.guestName,
+      alojamiento: formData.alojamiento,
+      checkInDate,
+      checkOutDate,
+      numberOfGuests: formData.guests,
+      specialRequests: formData.specialRequests
+    });
     
     try {
       const response = await service.post(
         '/reserva/addReserva',
         {
           guestName: formData.guestName,
-          userId: token,  
           alojamiento: formData.alojamiento,  
-          checkInDate: formData.checkIn,
-          checkOutDate: formData.checkOut,
+          checkInDate,
+          checkOutDate,
           numberOfGuests: formData.guests,
-          specialRequests: formData.specialRequests,
         },
         {
           headers: { Authorization: `Bearer ${token}` }, 
@@ -58,7 +74,8 @@ function Reserva() {
 
       console.log("Reserva realizada con éxito:", response.data);
       setSubmitted(true); 
-      navigate("/misreservas"); 
+      console.log("ID del hotel antes de la navegación:", hotelId);
+      navigate(`/reservas/${hotelId}`); 
     } catch (error) {
       console.error("Error al realizar la reserva:", error);
     }
@@ -70,9 +87,8 @@ function Reserva() {
       {submitted ? (
         <div className="confirmation-message">
           <h2>¡Reserva confirmada!</h2>
-          <p>Gracias, {formData.name}, por tu reserva.</p>
+          <p>Gracias por tu reserva.</p>
           <p>Te hemos enviado un correo de confirmación a: {formData.email}</p>
-          <p>Tipo de alojamiento: {formData.alojamiento}</p>
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="reserva-form">
@@ -150,21 +166,7 @@ function Reserva() {
             />
           </div>
           {/* esto no esta en el modelo */}
-          <div className="form-group">
-            <label htmlFor="alojamiento">Tipo de alojamiento</label>
-            <select
-              id="alojamiento"
-              name="alojamiento"
-              value={formData.alojamiento}
-              onChange={handleChange}
-              required
-            >
-              <option value="">Selecciona el tipo de alojamiento</option>
-              <option value="habitacion-estandar">Habitación estándar</option>
-              <option value="suite">Suite</option>
-              <option value="villa">Villa</option>
-            </select>
-          </div>
+         
 
           <button type="submit" className="submit-btn">
             Enviar reserva

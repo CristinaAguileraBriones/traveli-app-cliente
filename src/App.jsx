@@ -33,7 +33,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/hotels" element={<Hotel/>}/>
-        <Route path="/reservas/:hotelName" element={ <Private > <Reservas/> </Private> }/>
+        <Route path="/reservas/:hotelId" element={ <Private > <Reservas/> </Private> }/>
         <Route path="//user-profile" element={<Private > <UserProfile/> </Private>}/>
        
 
