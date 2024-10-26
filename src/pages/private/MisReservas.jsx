@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import service from "../../service/config";
 import { useNavigate } from "react-router-dom";
 import Reserva from "./Reservas";
+import FichaReserva from "../../components/FichaReserva";
 
 
 
@@ -9,16 +10,7 @@ export function MisReservas() {
  
   const [reservas, setReservas] = useState([]);
   const navigate = useNavigate()
-  // const [formData, setFormData] = useState({
-  //   guestName: "",
-  //   email: "",  
-  //   checkIn: "",
-  //   checkOut: "",
-  //   guests: 1,
-  //   specialRequests: "",
-  //   alojamiento: hotelId || "",  
-  // });
-
+ 
   const getReserva = async () => {
     const response = await service.get("/reserva");
     console.log(response);
@@ -56,37 +48,10 @@ export function MisReservas() {
       {reservas.map((reserva) => {
         
         return (
-          <div key={reserva._id}>
-
-          <h2>Nombre del hotel: {reserva.alojamiento.name}</h2>
-          <h3>Dirección: {reserva.alojamiento.address}</h3>
-          <p>Fecha de entrada: {new Date(reserva.checkInDate).toLocaleDateString()}</p>
-          <p>Fecha de salida: {new Date(reserva.checkOutDate).toLocaleDateString()}</p>
-          <p>Número de huéspedes: {reserva.numberOfGuests}</p>
-
-          
-            
-            <h3>{reserva.alojamiento.address}</h3>
-            <div>
-            {reserva.alojamiento.image.map((eachImg, index)=>{
-              return (
-                <img  key={index} src={eachImg} alt="imagen-hotel" />
-              )
-
-            })}
-            </div>
-           
-            <button onClick={handleDeleteReserva} name={reserva._id}>
-              Eliminar
-            </button>
-            <button onClick={() => navigate(`/editReservas/${reserva._id}`)} name={reserva._id}>Editar</button>
-          </div>
-        );
+          <FichaReserva key={reserva._id} reserva={reserva} handleDeleteReserva={handleDeleteReserva}/>
+        )
       })}
-        
       </div>
-
-     
     </div>
   );
 }

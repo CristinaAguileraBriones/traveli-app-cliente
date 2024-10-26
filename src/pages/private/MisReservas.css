@@ -2,3 +2,13 @@
 
   margin-top: 60px;
 }
+
+.imagenes-reservas{
+  height: 100px;
+}
+
+.contenedor-imagenes{
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+}

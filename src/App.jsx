@@ -36,7 +36,7 @@ function App() {
         <Route path="/hotels" element={<Hotel/>}/>
         <Route path="/reservas/:hotelId" element={ <Private > <Reservas/> </Private> }/>
         <Route path="/editReservas/:hotelId" element={ <Private > <EditReservas/> </Private> }/>
-        <Route path="//user-profile" element={<Private > <UserProfile/> </Private>}/>
+        <Route path="/user-profile" element={<Private > <UserProfile/> </Private>}/>
        
 
         {/* error FE routes here... */}
