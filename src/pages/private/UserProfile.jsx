@@ -6,7 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./UserProfile.css";
 
 function UserProfile() {
-  const { isLoggedIn, token } = useContext(AuthContext);
+  const { isLoggedIn, token, authenticateUser } = useContext(AuthContext);
   const [imageUrl, setImageUrl] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
@@ -90,6 +90,22 @@ function UserProfile() {
       console.log("Error al eliminar el favorito:", error);
     }
   };
+  
+
+  const handleDeleteUser = async (e)=>{
+    e.preventDefault()
+    try {
+      
+      const response = await service.delete(`/user/loggeduser`)
+      localStorage.removeItem("authToken")
+      await authenticateUser()
+      perfilUsuario()
+    } catch (error) {
+      console.log(error);
+    }
+    
+  }
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -157,7 +173,7 @@ function UserProfile() {
                 {formData.favoritos.map((fav, index) => (
                   <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
                     <h1>{fav.name}</h1>
-                    {fav.img}
+                    <img src={fav.image[0]} alt="imagen" style={{height:"100px"}} />
                     {fav.description}
                     {fav.price}
 
@@ -251,10 +267,15 @@ function UserProfile() {
               >
                 Cancelar
               </button>
+              
             </div>
+            
           </form>
+         
         )}
+         <button onClick={handleDeleteUser}>Borrar Usuario</button>
       </div>
+        
     </div>
   );
 }

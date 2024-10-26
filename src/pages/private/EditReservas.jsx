@@ -38,7 +38,7 @@ function EditReservas() {
     clone.checkOut = response.data.checkOutDate.split("T")[0]
     clone.guests = response.data.numberOfGuests
     clone.alojamiento = response.data.alojamiento
-    console.log(clone);
+    console.log(hotelId);
     setFormData(clone);
       
   }
@@ -56,9 +56,9 @@ function EditReservas() {
     const checkInDate = new Date(formData.checkIn);
     const checkOutDate = new Date(formData.checkOut)
     
-    if (!formData.guestName || !formData.email || !formData.checkIn || !formData.checkOut || !formData.guests || !formData.alojamiento) {
-      return;
-    }
+    // if (!formData.guestName || !formData.email || !formData.checkIn || !formData.checkOut || !formData.guests || !formData.alojamiento) {
+    //   return;
+    // }
     console.log("Datos de reserva que se modificarán:", {
       guestName: formData.guestName,
       alojamiento: formData.alojamiento,
@@ -85,7 +85,7 @@ function EditReservas() {
       console.log("Reserva realizada con éxito:", response.data);
       setSubmitted(true); 
       console.log("ID del hotel antes de la navegación:", hotelId);
-      navigate(`/reservas/${hotelId}`); 
+      navigate(`/misreservas`); 
     } catch (error) {
       console.error("Error al realizar la reserva:", error);
     }
