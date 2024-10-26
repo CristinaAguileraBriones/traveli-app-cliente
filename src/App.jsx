@@ -10,6 +10,7 @@ import Private from "./components/auth/Private";
 import UserProfile from "./pages/private/UserProfile";
 import NotFound from "./pages/error/NotFound";
 import MisReservas from "./pages/private/MisReservas";
+import EditReservas from "./pages/private/EditReservas";
 
 // components
 import Navbar from "./components/Navbar"
@@ -34,6 +35,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/hotels" element={<Hotel/>}/>
         <Route path="/reservas/:hotelId" element={ <Private > <Reservas/> </Private> }/>
+        <Route path="/editReservas/:hotelId" element={ <Private > <EditReservas/> </Private> }/>
         <Route path="//user-profile" element={<Private > <UserProfile/> </Private>}/>
        
 

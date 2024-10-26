@@ -1,10 +1,23 @@
 import React, { useState, useContext, useEffect } from "react";
 import service from "../../service/config";
+import { useNavigate } from "react-router-dom";
+import Reserva from "./Reservas";
+
 
 
 export function MisReservas() {
  
   const [reservas, setReservas] = useState([]);
+  const navigate = useNavigate()
+  // const [formData, setFormData] = useState({
+  //   guestName: "",
+  //   email: "",  
+  //   checkIn: "",
+  //   checkOut: "",
+  //   guests: 1,
+  //   specialRequests: "",
+  //   alojamiento: hotelId || "",  
+  // });
 
   const getReserva = async () => {
     const response = await service.get("/reserva");
@@ -41,6 +54,7 @@ export function MisReservas() {
       <h2>Nombre del hotel</h2>
       
       {reservas.map((reserva) => {
+        
         return (
           <div key={reserva._id}>
 
@@ -65,7 +79,7 @@ export function MisReservas() {
             <button onClick={handleDeleteReserva} name={reserva._id}>
               Eliminar
             </button>
-            <button onClick={handleEditReserva} name={reserva._id}>Editar</button>
+            <button onClick={() => navigate(`/editReservas/${reserva._id}`)} name={reserva._id}>Editar</button>
           </div>
         );
       })}
