@@ -28,6 +28,7 @@ function App() {
     
 
       <Routes>
+        
         <Route path="/" element={<HomePage />} />
         <Route path="/misreservas" element={<Private ><MisReservas /></Private>}/>
         <Route path="/signup" element={<Signup />} />
