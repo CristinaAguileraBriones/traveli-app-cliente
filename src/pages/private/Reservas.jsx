@@ -5,18 +5,18 @@ import { AuthContext } from "../../context/auth.context";
 import service from "../../service/config"; 
 
 function Reserva() {
-  const { hotelName } = useParams(); 
+  const { hotelId } = useParams(); 
   const { isLoggedIn, token } = useContext(AuthContext); 
   const navigate = useNavigate(); 
 
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
+    guestName: "",
+    email: "",  
     checkIn: "",
     checkOut: "",
     guests: 1,
     specialRequests: "",
-    alojamiento: "",
+    alojamiento: "",  
   });
 
   const [submitted, setSubmitted] = useState(false);
@@ -43,9 +43,9 @@ function Reserva() {
       const response = await service.post(
         '/reserva/addReserva',
         {
-          guestName: formData.name,
-          email: formData.email,
-          alojamiento: hotelName, 
+          guestName: formData.guestName,
+          userId: token,  
+          alojamiento: formData.alojamiento,  
           checkInDate: formData.checkIn,
           checkOutDate: formData.checkOut,
           numberOfGuests: formData.guests,
@@ -58,7 +58,7 @@ function Reserva() {
 
       console.log("Reserva realizada con éxito:", response.data);
       setSubmitted(true); 
-      navigate("/"); 
+      navigate("/misreservas"); 
     } catch (error) {
       console.error("Error al realizar la reserva:", error);
     }
@@ -66,7 +66,7 @@ function Reserva() {
 
   return (
     <div className="reserva-page">
-      <h1>Reserva tu Estancia en el alojamiento: {hotelName}</h1>
+      <h1>Reserva tu Estancia en el alojamiento: {hotelId}</h1>
       {submitted ? (
         <div className="confirmation-message">
           <h2>¡Reserva confirmada!</h2>
@@ -77,12 +77,12 @@ function Reserva() {
       ) : (
         <form onSubmit={handleSubmit} className="reserva-form">
           <div className="form-group">
-            <label htmlFor="name">Nombre completo</label>
+            <label htmlFor="name">Ingrese nombre de usuario</label>
             <input
               type="text"
-              id="name"
-              name="name"
-              value={formData.name}
+              id="guestName"
+              name="guestName"
+              value={formData.guestName}
               onChange={handleChange}
               placeholder="Introduce tu nombre completo"
               required
@@ -149,7 +149,7 @@ function Reserva() {
               placeholder="Especifica si tienes alguna solicitud especial (opcional)"
             />
           </div>
-
+          {/* esto no esta en el modelo */}
           <div className="form-group">
             <label htmlFor="alojamiento">Tipo de alojamiento</label>
             <select

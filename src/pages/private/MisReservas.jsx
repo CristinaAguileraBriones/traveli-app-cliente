@@ -1,7 +1,9 @@
 import React, { useState, useContext, useEffect } from "react";
 import service from "../../service/config";
 
+
 export function MisReservas() {
+ 
   const [reservas, setReservas] = useState([]);
 
  
@@ -27,6 +29,10 @@ export function MisReservas() {
     console.log(e.target.name);
   };
 
+  const handleEditReserva = async (e) =>{
+    await service.put(`/${e.target.name}/edit`)
+    getReserva()
+  }
   return (
     <div>
 
@@ -39,6 +45,13 @@ export function MisReservas() {
       {reservas.map((reserva) => {
         return (
           <div key={reserva._id}>
+
+          <h2>Nombre del hotel: {reserva.alojamiento.name}</h2>
+          <h3>Dirección: {reserva.alojamiento.address}</h3>
+          <p>Fecha de entrada: {new Date(reserva.checkInDate).toLocaleDateString()}</p>
+          <p>Fecha de salida: {new Date(reserva.checkOutDate).toLocaleDateString()}</p>
+          <p>Número de huéspedes: {reserva.numberOfGuests}</p>
+
           
             
             <h3>{reserva.alojamiento.address}</h3>
@@ -54,6 +67,7 @@ export function MisReservas() {
             <button onClick={handleDeleteReserva} name={reserva._id}>
               Eliminar
             </button>
+            <button onClick={handleEditReserva} name={reserva._id}>Editar</button>
           </div>
         );
       })}
