@@ -23,6 +23,7 @@ function Navbar() {
     <nav className="navbar">
       <Link className="nav-link" to="/">Home</Link>
       
+      
       {!isLoggedIn && <Link className="nav-link" to="/signup">Registro</Link>}
       {!isLoggedIn && <Link className="nav-link" to="/login">Acceso</Link>}
       {isLoggedIn && <Link className="nav-link" to="/user-profile">Mi perfil</Link>}

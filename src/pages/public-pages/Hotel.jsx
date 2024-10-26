@@ -1,40 +1,24 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect} from 'react';
 import { useNavigate } from "react-router-dom";
 import service from "../../service/config.js";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart } from '@fortawesome/free-solid-svg-icons'; // Importamos el ícono de corazón
-import { OverlayTrigger, Tooltip } from 'react-bootstrap'; // Para el tooltip
+import { faHeart } from '@fortawesome/free-solid-svg-icons'; 
+import { OverlayTrigger, Tooltip } from 'react-bootstrap'; 
 import './Hotel.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { AuthContext } from "../../context/auth.context.jsx"
 
 function Hotel() {
-  const { isLoggedIn, authenticateUser  } = useContext(AuthContext)
-  const [loading, setLoading] = useState(true);
+  const [isLoggedIn, setLoggedIn] = useState(true)
   const [searchTerm, setSearchTerm] = useState(''); 
   const [hotel, setHotel] = useState([]);  
   const [activeIndexes, setActiveIndexes] = useState({}); 
-  const [favorites, setFavorites] = useState({}); // Para manejar los favoritos
+  const [favorites, setFavorites] = useState({}); 
   const navigate = useNavigate();
+  
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
-
-  useEffect(() => {
-    const checkAuthentication = async () => {
-      await authenticateUser(); 
-      setLoading(false); 
-    };
-
-    checkAuthentication();
-  }, [authenticateUser]);
-
-  useEffect(() => {
-    if (!loading && !isLoggedIn) {
-      navigate('/login'); 
-    }
-  }, [isLoggedIn, loading, navigate]);
 
   useEffect(() => {
     service.get('/alojamiento')  
@@ -50,7 +34,6 @@ function Hotel() {
         }, {});
         setActiveIndexes(initialIndexes);
 
-        // Inicializamos favoritos como falso para cada hotel
         const initialFavorites = response.data.reduce((acc, hotel) => {
           acc[hotel._id] = false;
           return acc;
@@ -78,14 +61,10 @@ function Hotel() {
     }));
   };
 
-  //Manejar la acción de reservar hotel REVISAR
   const handleReserve = (hotelId) => {
     navigate(`/reservas/${hotelId}`);
   };
 
-  
-
-  // Manejar la acción de agregar/eliminar favoritos REVISAR
   const toggleFavorite = async (hotelId) => {
     if(!isLoggedIn){
       navigate("/login")
@@ -103,17 +82,13 @@ function Hotel() {
 
     setFavorites(prevFavorites => ({
       ...prevFavorites,
-      [hotelId]: !prevFavorites[hotelId] // Alterna entre true/false
+      [hotelId]: !prevFavorites[hotelId]
     }));
   } catch (error) {
     console.error('Error al actualizar favoritos:', error.response ? error.response.data : error);
   }
     
   };
-
- 
-
-  
 
   const filteredHotels = hotel.filter(hotel =>
     hotel.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -124,7 +99,6 @@ function Hotel() {
     <div className="hotel-page">
       <h1>Encuentra tu Hotel</h1>
 
-      {/* Barra de búsqueda */}
       <div className="search-bar">
         <input
           type="text"
@@ -134,7 +108,6 @@ function Hotel() {
         />
       </div>
 
-      {/* Sección de tarjetas de hoteles */}
       <div className="hotel-cards">
         {filteredHotels.map(hotel => (
           <div key={hotel._id} className="hotel-card">
@@ -149,7 +122,6 @@ function Hotel() {
                   </div>
                 ))}
               </div>
-              {/* Botones para cambiar de imagen */}
               <button className="carousel-control-prev" type="button" onClick={() => handlePrev(hotel._id)}>
                 <span className="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span className="visually-hidden">Previous</span>
@@ -163,25 +135,24 @@ function Hotel() {
             <p>{hotel.address}</p>
             <p>{hotel.description}</p>
 
-            {/* Icono de corazón con pop-up (Agregar a favoritos) */}
             <div className="favorite-icon">
               <OverlayTrigger
                 placement="top"
-                overlay={<Tooltip id={`tooltip-${hotel._id}`}>Agregar a favoritos</Tooltip>} // Pop-up
+                overlay={<Tooltip id={`tooltip-${hotel._id}`}>Agregar a favoritos</Tooltip>}
               >
                 <FontAwesomeIcon
                   icon={faHeart}
                   size="2x"
                   style={{ color: favorites[hotel._id] ? 'green' : 'gray', cursor: 'pointer' }}
-                  onClick={() => toggleFavorite(hotel._id)} // Cambia el estado al hacer clic
+                  onClick={() => toggleFavorite(hotel._id)}
                 />
               </OverlayTrigger>
             </div>
 
-            {/* Botón de Reservar */}
+            
             <button 
               className="btn btn-primary mt-3" 
-              onClick={() => handleReserve(hotel._id)} // Manejar la acción de reservar
+              onClick={() => handleReserve(hotel._id)}
             >
               Reservar
             </button>

@@ -2,18 +2,18 @@ import "./App.css";
 import { Routes, Route } from "react-router";
 
 // pages
-import HomePage from "./pages/auth/HomePage"
+import HomePage from "./pages/public-pages/HomePage"
 import Login from "./pages/auth/Login"
-import Contact from "./pages/auth/Contact"
+import Contact from "./pages/public-pages/Contact"
 import Signup from "./pages/auth/Signup"
-import PrivatePageExample from "./pages/private/PrivatePageExample";
 import Private from "./components/auth/Private";
 import UserProfile from "./pages/private/UserProfile";
 import NotFound from "./pages/error/NotFound";
+import MisReservas from "./pages/private/MisReservas";
 
 // components
 import Navbar from "./components/Navbar"
-import Hotel from "./pages/auth/Hotel"
+import Hotel from "./pages/public-pages/Hotel"
 import Reservas from "./pages/private/Reservas"
 
 
@@ -28,13 +28,14 @@ function App() {
 
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/misreservas" element={<Private ><MisReservas /></Private>}/>
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/hotels" element={<Hotel/>}/>
         <Route path="/reservas/:hotelName" element={ <Private > <Reservas/> </Private> }/>
         <Route path="//user-profile" element={<Private > <UserProfile/> </Private>}/>
-        <Route path="/private-page-example" element={<Private ><PrivatePageExample/> </Private>} />
+       
 
         {/* error FE routes here... */}
         <Route path="/error" element={<Error/>}/>
