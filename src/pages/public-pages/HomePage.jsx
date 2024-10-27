@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
-import './HomePage.css';  // Asegúrate de tener tu archivo CSS
-//import imagenHome from "../images/home.jpg"
+import '../../styles/HomePage.css';  
+
 
 export const HomePage = () => {
   return (
     <>
-      {/* Hero Section: Imagen de portada y encabezado */}
+     
       <section className="hero-section">
         <div className="hero-content">
           <h1>Bienvenido a Traveli, reserva tu hotel</h1>
@@ -17,7 +17,7 @@ export const HomePage = () => {
         </div>
       </section>
 
-      {/* Features or Services Section: Características o servicios */}
+
       <section className="features-section">
         <h2>Nuestros Servicios</h2>
         <div className="features-grid">
@@ -37,7 +37,7 @@ export const HomePage = () => {
         </div>
       </section>
 
-      {/* Testimonials Section: Testimonios de clientes */}
+   
       <section className="testimonials-section">
         <h2>Lo que dicen nuestros clientes</h2>
         <div className="testimonial-item">
@@ -50,7 +50,6 @@ export const HomePage = () => {
         </div>
       </section>
 
-      {/* Footer Section: Pie de página */}
       <footer className="footer-section">
         <p>&copy; 2024 Nuestra Empresa. Todos los derechos reservados.</p>
         <p>Contacto: info@nuestraempresa.com</p>

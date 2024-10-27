@@ -1,5 +1,5 @@
 import React from "react";
-import "./Contact.css";
+import "../../styles/Contact.css";
 import avatar_miguel from "../../assets/images/avatar_miguel.jpg"
 import avatar_cristina from "../../assets/images/avatar_cristina.jpg"
 import avatar_beyonse from "../../assets/images/avatar_beyonse.png"
@@ -11,7 +11,6 @@ function Contact() {
     <section className="contact-section">
       <div className="contact-page">
         
-        {/* Sección 1: Introducción sobre la empresa */}
         <div className="about-us">
           <h1>Sobre Nosotros</h1>
           <p>
@@ -31,11 +30,11 @@ function Contact() {
           </p>
         </div>
 
-        {/* Sección 2: Nuestro Equipo */}
+  
         <div className="team-section">
           <h2>Nuestro Equipo</h2>
           <div className="profile-cards">
-            {/* Perfil 1 */}
+         
             <div className="profile-card">
               <img
                 src= {avatar_miguel}
@@ -54,7 +53,7 @@ function Contact() {
               </a>
             </div>
 
-            {/* Perfil 2 */}
+ 
             <div className="profile-card">
               <img
                 src={avatar_cristina}
@@ -73,7 +72,6 @@ function Contact() {
               </a>
             </div>
 
-            {/* Perfil 3 */}
             <div className="profile-card">
               <img
                 src={avatar_beyonse}
@@ -94,7 +92,7 @@ function Contact() {
           </div>
         </div>
 
-        {/* Sección 3: Atención al Cliente */}
+      
         <div className="customer-support-section">
           <h2>Atención al Cliente</h2>
           <div className="customer-support-form">

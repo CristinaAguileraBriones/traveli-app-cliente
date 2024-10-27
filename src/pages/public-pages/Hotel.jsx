@@ -4,7 +4,7 @@ import service from "../../service/config.js";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons'; 
 import { OverlayTrigger, Tooltip } from 'react-bootstrap'; 
-import './Hotel.css';
+import '../../styles/Hotel.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Hotel() {
@@ -133,7 +133,8 @@ function Hotel() {
             </div>
             <h3>{hotel.name}</h3>
             <p>{hotel.address}</p>
-            <p>{hotel.description}</p>
+            <div className='description-container'><p className='hotel-description'>{hotel.description}</p></div>
+            <p>{hotel.price} euros/noche</p>
 
             <div className="favorite-icon">
               <OverlayTrigger
@@ -143,19 +144,17 @@ function Hotel() {
                 <FontAwesomeIcon
                   icon={faHeart}
                   size="2x"
-                  style={{ color: favorites[hotel._id] ? 'green' : 'red', cursor: 'pointer' }}
+                  style={{ color: favorites[hotel._id] ? 'green' : 'grey', cursor: 'pointer' }}
                   onClick={() => toggleFavorite(hotel._id)}
                 />
               </OverlayTrigger>
             </div>
 
-            
-            <button 
-              className="btn btn-primary mt-3" 
-              onClick={() => handleReserve(hotel._id)}
-            >
-              Reservar
-            </button>
+            <div className="reserve-button-container">  <button className="btn btn-primary mt-3" onClick={() => handleReserve(hotel._id)}>
+                    Reservar
+                    </button>
+            </div>
+          
           </div>
         ))}
       </div>
