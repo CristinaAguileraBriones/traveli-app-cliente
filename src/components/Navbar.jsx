@@ -1,17 +1,16 @@
 import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
-import './Navbar.css';  // Importamos el archivo CSS con los estilos
-
+import "../styles/Navbar.css";  
 function Navbar() {
   const navigate = useNavigate();
   const { isLoggedIn, authenticateUser } = useContext(AuthContext);
 
   const handleLogout = async () => {
     try {
-      localStorage.removeItem("authToken"); // removemos el token
+      localStorage.removeItem("authToken"); 
 
-      await authenticateUser(); // validamos el token
+      await authenticateUser(); 
 
       navigate("/");
     } catch (error) {
