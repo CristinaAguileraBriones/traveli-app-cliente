@@ -143,7 +143,7 @@ function Hotel() {
                 <FontAwesomeIcon
                   icon={faHeart}
                   size="2x"
-                  style={{ color: favorites[hotel._id] ? 'green' : 'gray', cursor: 'pointer' }}
+                  style={{ color: favorites[hotel._id] ? 'green' : 'red', cursor: 'pointer' }}
                   onClick={() => toggleFavorite(hotel._id)}
                 />
               </OverlayTrigger>
