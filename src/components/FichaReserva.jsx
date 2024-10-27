@@ -1,32 +1,43 @@
 import { useNavigate } from "react-router-dom";
-import "../styles/MisReservas.css"
-
+import "../styles/MisReservas.css";
 
 function FichaReserva(props) {
-  const {reserva,handleDeleteReserva} = props;
+  const { reserva, handleDeleteReserva } = props;
   const navigate = useNavigate();
-
 
   return (
     <div className="reserva-card">
-      <h2>Nombre del hotel: {reserva.alojamiento.name}</h2>
-      <h3>Dirección: {reserva.alojamiento.address}</h3>
-      <p>
-        Fecha de entrada: {new Date(reserva.checkInDate).toLocaleDateString()}
-      </p>
-      <p>
-        Fecha de salida: {new Date(reserva.checkOutDate).toLocaleDateString()}
-      </p>
-      <p>Número de huéspedes: {reserva.numberOfGuests}</p>
+      <div className="informacion-reserva">
+        <h2>Nombre del hotel: {reserva.alojamiento.name}</h2>
+        <h3>Dirección: {reserva.alojamiento.address}</h3>
+        <p>
+          Fecha de entrada: {new Date(reserva.checkInDate).toLocaleDateString()}
+        </p>
+        <p>
+          Fecha de salida: {new Date(reserva.checkOutDate).toLocaleDateString()}
+        </p>
+        <p>Número de huéspedes: {reserva.numberOfGuests}</p>
 
-      <h3>{reserva.alojamiento.address}</h3>
+        <h3>{reserva.alojamiento.address}</h3>
+      </div>
       <div className="contenedor-imagenes">
         {reserva.alojamiento.image.map((eachImg, index) => {
-          return <img className="imagenes-reservas" key={index} src={eachImg} alt="imagen-hotel" />;
+          return (
+            <img
+              className="imagenes-reservas"
+              key={index}
+              src={eachImg}
+              alt="imagen-hotel"
+            />
+          );
         })}
       </div>
 
-      <button className="button" onClick={handleDeleteReserva} name={reserva._id}>
+      <button
+        className="button"
+        onClick={handleDeleteReserva}
+        name={reserva._id}
+      >
         Eliminar
       </button>
       <button
