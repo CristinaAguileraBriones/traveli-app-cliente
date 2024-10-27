@@ -1,0 +1,115 @@
+
+.reserva-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #f7f9fc;
+  padding: 20px;
+}
+
+.reserva-title {
+  font-size: 1.2em; 
+  color: #666;
+  text-align: center;
+  margin-bottom: 10px;
+  font-weight: normal;
+}
+
+.reserva-form {
+  width: 100%;
+  max-width: 500px;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+.reserva-page h1 {
+  font-size: 1.8em;
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.confirmation-message {
+  text-align: center;
+  background-color: #e6f7e9;
+  border: 1px solid #b2e0b5;
+  color: #2f7a33;
+  padding: 20px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.reserva-form label {
+  font-weight: bold;
+  color: #555;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.reserva-form input[type="text"],
+.reserva-form input[type="email"],
+.reserva-form input[type="date"],
+.reserva-form input[type="number"],
+.reserva-form textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #d1dce6;
+  border-radius: 6px;
+  font-size: 1em;
+  color: #333;
+  background-color: #f7f9fc;
+  transition: border-color 0.3s;
+}
+
+.reserva-form input:focus,
+.reserva-form textarea:focus {
+  outline: none;
+  border-color: #007bff;
+  background-color: #fff;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 12px;
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  text-transform: uppercase;
+}
+
+.submit-btn:hover {
+  background-color: #0056b3;
+  box-shadow: 0 4px 12px rgba(0, 91, 187, 0.2);
+}
+
+.reserva-form textarea {
+  height: 80px;
+  resize: none;
+}
+
+
+@media (max-width: 576px) {
+  .reserva-form {
+    padding: 20px;
+  }
+
+  .reserva-page h1 {
+    font-size: 1.5em;
+  }
+}

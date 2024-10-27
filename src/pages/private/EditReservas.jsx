@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import "./Reserva.css";
+import "../../styles/Reserva.css";
 import { AuthContext } from "../../context/auth.context"; 
 import service from "../../service/config";
 import { useParams, useNavigate } from "react-router-dom";

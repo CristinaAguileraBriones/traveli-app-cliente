@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import "./Reserva.css";
+import "../../styles/Reserva.css"
 import { useParams, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context"; 
 import service from "../../service/config";
@@ -7,7 +7,7 @@ import service from "../../service/config";
 
 function Reserva() {
   const { hotelId } = useParams(); 
-  const { isLoggedIn, token } = useContext(AuthContext); 
+  const { token } = useContext(AuthContext); 
   const navigate = useNavigate(); 
 
   const [formData, setFormData] = useState({
@@ -83,7 +83,7 @@ function Reserva() {
 
   return (
     <div className="reserva-page">
-      <h1>Reserva tu Estancia en el alojamiento: {hotelId}</h1>
+      <h1 className="reserva-title">Reserva tu Estancia en el alojamiento: {hotelId}</h1>
       {submitted ? (
         <div className="confirmation-message">
           <h2>¡Reserva confirmada!</h2>
@@ -165,9 +165,7 @@ function Reserva() {
               placeholder="Especifica si tienes alguna solicitud especial (opcional)"
             />
           </div>
-          {/* esto no esta en el modelo */}
          
-
           <button type="submit" className="submit-btn">
             Enviar reserva
           </button>

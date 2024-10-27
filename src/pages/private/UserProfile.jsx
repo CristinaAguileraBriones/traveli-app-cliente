@@ -3,7 +3,7 @@ import { AuthContext } from "../../context/auth.context";
 import { useNavigate } from "react-router-dom";
 import service from "../../service/config";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./UserProfile.css";
+import "../../styles/UserProfile.css";
 import FichaFavorito from "../../components/FichaFavorito";
 
 function UserProfile() {
@@ -64,7 +64,7 @@ function UserProfile() {
   };
 
   useEffect(() => {
-    // getReserva();
+   
 
     perfilUsuario();
   }, []);
@@ -129,10 +129,6 @@ function UserProfile() {
     navigate("/hotels");
   };
 
-  const goToReservation = () => {
-    navigate("/reservas");
-  };
-
   const goToMisReservas = () => {
     navigate("/misreservas");
   };
@@ -173,17 +169,7 @@ function UserProfile() {
 
                 {formData.favoritos.map((fav, index) => (
                   <FichaFavorito key={fav._id} fav={fav} handleDeleteFavorito={handleDeleteFavorito}/>
-                  // <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
-                  //   <h1>{fav.name}</h1>
-                  //   <img src={fav.image[0]} alt="imagen" style={{height:"100px"}} />
-                  //   {fav.description}
-                  //   {fav.price}
-
-                  //   <button className="btn btn-danger btn-sm" onClick={() => handleDeleteFavorito(fav._id)}>
-                  //     Eliminar
-                  //   </button>
-                  
-                  // </li>
+                 
                 ))}
               </ul>
             )}
