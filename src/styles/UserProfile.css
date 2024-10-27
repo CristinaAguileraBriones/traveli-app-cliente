@@ -1,6 +1,6 @@
 
 .container-fluid {
-  background-color: #f0f2f5;
+  background-color: #004782 !important;
   padding: 20px;
   display: flex;
   align-items: center;
@@ -153,5 +153,22 @@ button[type="submit"], button[type="button"] {
 .fav-price {
   font-size: 1rem;
   color: #333;
+  font-weight: bold;
+}
+
+
+.boton-borrar-usuario {
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 1em;
+  color: #fff; 
+  background-color: #007bff; 
+  transition: background-color 0.3s ease, font-size 0.3s ease; 
+}
+
+.boton-borrar-usuario:hover {
+  background-color: red; 
+  font-size: 1.3em;
+  color: black;
   font-weight: bold;
 }

@@ -261,7 +261,7 @@ function UserProfile() {
           </form>
          
         )}
-         <button onClick={handleDeleteUser}>Borrar Usuario</button>
+         <button className="boton-borrar-usuario" onClick={handleDeleteUser}>Borrar Usuario</button>
       </div>
         
     </div>

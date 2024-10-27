@@ -38,7 +38,7 @@ body, html {
 }
 
 .nav-link:hover {
-  background-color: #555;
+  background-color: #504afe;
 }
 
 .logout-link {
@@ -47,4 +47,9 @@ body, html {
 
 .logout-link:hover {
   background-color: #d9534f;
+}
+
+.nav-link:active,
+.nav-link:visited {
+  color: white; /* Mantiene el texto blanco al hacer clic o visitar */
 }
