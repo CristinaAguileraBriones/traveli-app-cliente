@@ -1,5 +1,9 @@
 import { Link } from 'react-router-dom';
-import '../../styles/HomePage.css';  
+import '../../styles/HomePage.css'; 
+import tuiter from  "../../assets/images/tuiter.png"
+import fb from "../../assets/images/fb.png"
+import instagram from "../../assets/images/instagram.png"
+import spain from "../../assets/images/spain.png"
 
 
 export const HomePage = () => {
@@ -51,9 +55,27 @@ export const HomePage = () => {
       </section>
 
       <footer className="footer-section">
-        <p>&copy; 2024 Nuestra Empresa. Todos los derechos reservados.</p>
-        <p>Contacto: info@nuestraempresa.com</p>
-      </footer>
+  <div className="footer-content">
+    <img
+      src={spain} 
+      alt="Bandera de España"
+      className="flag-icon"
+    />
+    <p>&copy; 2024 Traveli. Todos los derechos reservados.</p>
+    <p>Contacto: info@nuestraempresa.com</p>
+    <div className="social-icons">
+      <a href="https://www.facebook.com" target="_blank">
+        <img src={fb} alt="Facebook" />
+      </a>
+      <a href="https://www.twitter.com" target="_blank">
+        <img src={tuiter} alt="Twitter" />
+      </a>
+      <a href="https://www.instagram.com" target="_blank">
+        <img src={instagram} alt="Instagram" />
+      </a>
+    </div>
+  </div>
+</footer>
     </>
   );
 };

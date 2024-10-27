@@ -1,13 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
+
 body, html {
   margin: 0;
   padding: 0;
   background-color: #004782;
   height: 100%; 
+  font-family: 'Montserrat', Arial, sans-serif; 
 }
 
-
 .navbar {
-  background-color: black;
+  background-color: #003366; 
   padding: 10px 20px;
   display: flex;
   justify-content: space-between;
@@ -19,13 +21,14 @@ body, html {
   z-index: 1000;
   margin: 0; 
   box-sizing: border-box;
+  border-radius: 15px; 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); 
+  border: 2px solid white; 
 }
-
 
 .navbar + * {
   margin-top: 70px; 
 }
-
 
 .nav-link {
   color: white;
@@ -33,12 +36,14 @@ body, html {
   margin: 0 15px;
   padding: 10px 15px;
   font-weight: bold;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
+  border-radius: 15px; 
+  transition: background-color 0.3s ease, border 0.3s ease; 
+  border: 2px solid transparent; 
 }
 
 .nav-link:hover {
-  background-color: #504afe;
+  background-color: #002244; 
+  border: 2px solid white; 
 }
 
 .logout-link {
@@ -46,10 +51,10 @@ body, html {
 }
 
 .logout-link:hover {
-  background-color: #d9534f;
+  background-color: yellow; 
 }
 
 .nav-link:active,
 .nav-link:visited {
-  color: white; /* Mantiene el texto blanco al hacer clic o visitar */
+  color: white; 
 }

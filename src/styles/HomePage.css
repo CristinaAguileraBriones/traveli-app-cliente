@@ -1,4 +1,3 @@
-
 h1, h2, h3 {
   color: #333; 
 }
@@ -33,8 +32,6 @@ section {
   z-index: 0;
 }
 
-
-
 .hero-section h1 {
   color: white;
   font-size: 50px; 
@@ -49,7 +46,7 @@ section {
   text-align: center; 
   justify-content: center; 
   animation: fadeInUp 1s ease-out; 
-  display: inline
+  display: inline;
 }
 
 @keyframes fadeInUp {
@@ -63,11 +60,9 @@ section {
   }
 }
 
-
-.hero-content p{
+.hero-content p {
   font-size: 30px;
 }
-
 
 .hero-content, .hero-content p {
   position: relative;
@@ -85,7 +80,6 @@ section {
   margin: 0 auto;
 }
 
-/* Features section */
 .features-section {
   background-color: #f8b195; 
 }
@@ -126,17 +120,7 @@ section {
   transition: transform 0.3s ease;
 }
 
-.feature-item::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); 
-  z-index: 1; 
-}
-
+.feature-item::before,
 .feature-item-reserva::before {
   content: '';
   position: absolute;
@@ -148,17 +132,17 @@ section {
   z-index: 1; 
 }
 
-.feature-item h3, .feature-item p, .feature-item-reserva h3, .feature-item-reserva p  {
+.feature-item h3,
+.feature-item p,
+.feature-item-reserva h3,
+.feature-item-reserva p {
   position: relative;
   z-index: 2; 
   color: #fff; 
   text-decoration: none;
 }
 
-.feature-item:hover {
-  transform: scale(1.05);
-}
-
+.feature-item:hover,
 .feature-item-reserva:hover {
   transform: scale(1.05);
 }
@@ -176,15 +160,61 @@ section {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Footer section */
 .footer-section {
-  background-color: #a0d9d9; 
-  color: #333; 
+  background-color: #003366; 
+  color:white; 
   padding: 20px 0;
+  text-align: center; 
+  border-top: 2px solid white; 
 }
 
 .footer-section p {
   margin: 5px 0;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.flag-container {
+  display: flex; 
+  align-items: center; 
+  margin-bottom: 10px; 
+}
+
+.flag-icon {
+  width: 50px; 
+  height: 50px;
+  border-radius: 50%; 
+  margin-right: 10px; 
+}
+
+.flag-text {
+  font-size: 18px; 
+  color: white; 
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.social-icons a {
+  margin: 0 10px; 
+}
+
+.social-icons img {
+  width: 30px; 
+  height: 30px;
+  border-radius: 50%; 
+  transition: transform 0.3s;
+}
+
+.social-icons img:hover {
+  transform: scale(1.1); 
 }
 
 a {
@@ -192,8 +222,6 @@ a {
   color: inherit; 
 }
 
-
 .features-section a {
   text-decoration: none; 
 }
-
