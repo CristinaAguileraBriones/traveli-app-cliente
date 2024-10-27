@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import service from "../../service/config";
 import { useNavigate } from "react-router-dom";
-import Reserva from "./Reservas";
 import FichaReserva from "../../components/FichaReserva";
 
 
@@ -42,9 +41,7 @@ export function MisReservas() {
       <div className="contenedor-general-reservas">
 
       <h1>Mis reservas</h1>
-
-      <h2>Nombre del hotel</h2>
-      
+ 
       {reservas.map((reserva) => {
         
         return (

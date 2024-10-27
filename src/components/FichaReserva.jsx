@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import "../pages/private/MisReservas.css"
+import "../styles/MisReservas.css"
 
 
 function FichaReserva(props) {
@@ -8,7 +8,7 @@ function FichaReserva(props) {
 
 
   return (
-    <div>
+    <div className="reserva-card">
       <h2>Nombre del hotel: {reserva.alojamiento.name}</h2>
       <h3>Dirección: {reserva.alojamiento.address}</h3>
       <p>
@@ -30,6 +30,7 @@ function FichaReserva(props) {
         Eliminar
       </button>
       <button
+        className="edit-button"
         onClick={() => navigate(`/editReservas/${reserva._id}`)}
         name={reserva._id}
       >
