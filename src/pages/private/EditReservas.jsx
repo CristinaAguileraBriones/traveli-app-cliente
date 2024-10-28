@@ -45,7 +45,7 @@ function EditReservas() {
 
 
   useEffect(() => {
-    // console.log("ID del hotel (hotelId):", hotelId);
+    
     getReserva()
   }, []);
 
@@ -56,9 +56,7 @@ function EditReservas() {
     const checkInDate = new Date(formData.checkIn);
     const checkOutDate = new Date(formData.checkOut)
     
-    // if (!formData.guestName || !formData.email || !formData.checkIn || !formData.checkOut || !formData.guests || !formData.alojamiento) {
-    //   return;
-    // }
+    
     console.log("Datos de reserva que se modificarán:", {
       guestName: formData.guestName,
       alojamiento: formData.alojamiento,

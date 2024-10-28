@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import service from "../../service/config.js";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context.jsx";
-import "./Login.css";
+import "../../styles/Login.css";
 
 function Login() {
   const navigate = useNavigate();

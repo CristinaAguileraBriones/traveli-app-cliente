@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import service from "../../service/config";
-import "./Signup.css";
+import "../../styles/Signup.css";
 
 function Signup() {
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ function Signup() {
         name,
         password,
       };
-      //con service nos ahorramos la url
+     
       await service.post("/auth/signup", newUser);
       navigate("/login");
     } catch (error) {
@@ -33,7 +33,7 @@ function Signup() {
       if (error.response.status === 400) {
         setErrorMessage(error.response.data.message);
       } else {
-        //! aqui colocamos la pag de error.
+        
       }
     }
   };
